@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\gvva\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\gvva\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Chess-AI.530682109.00" t="ExcludeRecursive" />
+    <e p="C:\Users\gvva\Projects\Chess-AI" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Book" t="Include">
+          <e p="Book.txt" t="Include" />
+          <e p="Games.txt" t="Include" />
+          <e p="Notes.txt" t="Include" />
+          <e p="PGNs" t="Include">
+            <e p="Baden2015.txt" t="Include" />
+            <e p="Baden2018.txt" t="Include" />
+            <e p="Baden2019.txt" t="Include" />
+            <e p="Baku2008.txt" t="Include" />
+            <e p="Bazna2010.txt" t="Include" />
+            <e p="Beijing2013.txt" t="Include" />
+            <e p="Bermuda2005.txt" t="Include" />
+            <e p="Biel2006.txt" t="Include" />
+            <e p="Biel2007.txt" t="Include" />
+            <e p="Biel2008.txt" t="Include" />
+            <e p="Biel2009.txt" t="Include" />
+            <e p="Biel2011.txt" t="Include" />
+            <e p="Biel2012.txt" t="Include" />
+            <e p="Biel2014.txt" t="Include" />
+            <e p="Biel2018.txt" t="Include" />
+            <e p="Bilbao2008.txt" t="Include" />
+            <e p="Bilbao2009.txt" t="Include" />
+            <e p="Bilbao2010.txt" t="Include" />
+            <e p="Bilbao2011.txt" t="Include" />
+            <e p="Bilbao2012.txt" t="Include" />
+            <e p="Bilbao2016.txt" t="Include" />
+            <e p="Donostia2009.txt" t="Include" />
+            <e p="Dortmund2005.txt" t="Include" />
+            <e p="Dortmund2006.txt" t="Include" />
+            <e p="Dortmund2007.txt" t="Include" />
+            <e p="Dortmund2008.txt" t="Include" />
+            <e p="Dortmund2009.txt" t="Include" />
+            <e p="Dortmund2010.txt" t="Include" />
+            <e p="Dortmund2011.txt" t="Include" />
+            <e p="Dortmund2012.txt" t="Include" />
+            <e p="Dortmund2014.txt" t="Include" />
+            <e p="Dortmund2015.txt" t="Include" />
+            <e p="Dortmund2019.txt" t="Include" />
+            <e p="DosHermanas2005.txt" t="Include" />
+            <e p="Elista2008.txt" t="Include" />
+            <e p="Foros2006.txt" t="Include" />
+            <e p="Foros2007.txt" t="Include" />
+            <e p="Foros2008.txt" t="Include" />
+            <e p="Geneva2017.txt" t="Include" />
+            <e p="Gibraltar2019.txt" t="Include" />
+            <e p="Havana2010.txt" t="Include" />
+            <e p="Hoogeveen2006.txt" t="Include" />
+            <e p="Jermuk2009.txt" t="Include" />
+            <e p="KhantyMansiysk2015.txt" t="Include" />
+            <e p="Linares2005.txt" t="Include" />
+            <e p="Linares2006.txt" t="Include" />
+            <e p="Linares2007.txt" t="Include" />
+            <e p="Linares2008.txt" t="Include" />
+            <e p="Linares2009.txt" t="Include" />
+            <e p="Linares2010.txt" t="Include" />
+            <e p="London2009.txt" t="Include" />
+            <e p="London2012.txt" t="Include" />
+            <e p="London2015.txt" t="Include" />
+            <e p="London2016.txt" t="Include" />
+            <e p="London2018.txt" t="Include" />
+            <e p="Medias2011.txt" t="Include" />
+            <e p="Moscow2005.txt" t="Include" />
+            <e p="Moscow2006.txt" t="Include" />
+            <e p="Moscow2007.txt" t="Include" />
+            <e p="Moscow2008.txt" t="Include" />
+            <e p="Moscow2009.txt" t="Include" />
+            <e p="Moscow2010.txt" t="Include" />
+            <e p="Moscow2011.txt" t="Include" />
+            <e p="Moscow2012.txt" t="Include" />
+            <e p="Moscow2013.txt" t="Include" />
+            <e p="Moscow2016.txt" t="Include" />
+            <e p="Moscow2017.txt" t="Include" />
+            <e p="Moscow2019.txt" t="Include" />
+            <e p="Nalchik2009.txt" t="Include" />
+            <e p="Nanjing2008.txt" t="Include" />
+            <e p="Nanjing2009.txt" t="Include" />
+            <e p="Nanjing2010.txt" t="Include" />
+            <e p="Pamplona2006.txt" t="Include" />
+            <e p="Paris2013.txt" t="Include" />
+            <e p="Poikovsky2005.txt" t="Include" />
+            <e p="Poikovsky2006.txt" t="Include" />
+            <e p="Poikovsky2007.txt" t="Include" />
+            <e p="Poikovsky2008.txt" t="Include" />
+            <e p="Poikovsky2009.txt" t="Include" />
+            <e p="ReggioEmilia2012.txt" t="Include" />
+            <e p="Riga2019.txt" t="Include" />
+            <e p="SaintLouis2014.txt" t="Include" />
+            <e p="SaintLouis2015.txt" t="Include" />
+            <e p="SaintLouis2016.txt" t="Include" />
+            <e p="SaintLouis2017.txt" t="Include" />
+            <e p="SaintLouis2018.txt" t="Include" />
+            <e p="SaintLouis2019.txt" t="Include" />
+            <e p="Sarajevo2008.txt" t="Include" />
+            <e p="Shamkir2014.txt" t="Include" />
+            <e p="Shamkir2015.txt" t="Include" />
+            <e p="Shamkir2016.txt" t="Include" />
+            <e p="Shamkir2017.txt" t="Include" />
+            <e p="Shamkir2018.txt" t="Include" />
+            <e p="Shamkir2019.txt" t="Include" />
+            <e p="Sharjah2017.txt" t="Include" />
+            <e p="Shenzhen2019.txt" t="Include" />
+            <e p="Sochi2008.txt" t="Include" />
+            <e p="Sofia2005.txt" t="Include" />
+            <e p="Sofia2006.txt" t="Include" />
+            <e p="Sofia2007.txt" t="Include" />
+            <e p="Sofia2008.txt" t="Include" />
+            <e p="Sofia2009.txt" t="Include" />
+            <e p="Stavanger2013.txt" t="Include" />
+            <e p="Stavanger2014.txt" t="Include" />
+            <e p="Stavanger2015.txt" t="Include" />
+            <e p="Stavanger2016.txt" t="Include" />
+            <e p="Stavanger2017.txt" t="Include" />
+            <e p="Stavanger2018.txt" t="Include" />
+            <e p="Stavanger2019.txt" t="Include" />
+            <e p="Stavanger2020.txt" t="Include" />
+            <e p="Tashkent2012.txt" t="Include" />
+            <e p="Tbilisi2015.txt" t="Include" />
+            <e p="Thessalonika2013.txt" t="Include" />
+            <e p="WijkaanZee2006.txt" t="Include" />
+            <e p="WijkaanZee2007.txt" t="Include" />
+            <e p="WijkaanZee2008.txt" t="Include" />
+            <e p="WijkaanZee2009.txt" t="Include" />
+            <e p="WijkaanZee2010.txt" t="Include" />
+            <e p="WijkaanZee2011.txt" t="Include" />
+            <e p="WijkaanZee2012.txt" t="Include" />
+            <e p="WijkaanZee2013.txt" t="Include" />
+            <e p="WijkaanZee2014.txt" t="Include" />
+            <e p="WijkaanZee2015.txt" t="Include" />
+            <e p="WijkaanZee2016.txt" t="Include" />
+            <e p="WijkaanZee2017.txt" t="Include" />
+            <e p="WijkaanZee2018.txt" t="Include" />
+            <e p="WijkaanZee2019.txt" t="Include" />
+            <e p="WijkaanZee2020.txt" t="Include" />
+            <e p="Zagreb2019.txt" t="Include" />
+            <e p="Zug2013.txt" t="Include" />
+            <e p="Zurich2014.txt" t="Include" />
+            <e p="Zurich2015.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Resources" t="Include">
+          <e p="UnlitAlpha.shader" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Core" t="Include">
+            <e p="AI" t="Include">
+              <e p="AISettings.cs" t="Include" />
+              <e p="Evaluation.cs" t="Include" />
+              <e p="MoveOrdering.cs" t="Include" />
+              <e p="Search.cs" t="Include" />
+            </e>
+            <e p="AIPlayer.cs" t="Include" />
+            <e p="BitBoardUtility.cs" t="Include" />
+            <e p="Board.cs" t="Include" />
+            <e p="BoardRepresentation.cs" t="Include" />
+            <e p="Clock.cs" t="Include" />
+            <e p="Coord.cs" t="Include" />
+            <e p="FenUtility.cs" t="Include" />
+            <e p="GameManager.cs" t="Include" />
+            <e p="HumanPlayer.cs" t="Include" />
+            <e p="Move.cs" t="Include" />
+            <e p="MoveGenerator.cs" t="Include" />
+            <e p="Piece.cs" t="Include" />
+            <e p="PieceList.cs" t="Include" />
+            <e p="PieceSquareTable.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
+            <e p="PrecomputedMoveData.cs" t="Include" />
+            <e p="PseudoLegalMoveGenerator.cs" t="Include" />
+            <e p="TranspositionTable.cs" t="Include" />
+            <e p="Zobrist.cs" t="Include" />
+          </e>
+          <e p="Editor" t="Include">
+            <e p="AISettingsEditor.cs" t="Include" />
+            <e p="GameManagerEditor.cs" t="Include" />
+          </e>
+          <e p="Other" t="Include">
+            <e p="Book" t="Include">
+              <e p="Book.cs" t="Include" />
+              <e p="BookCreator.cs" t="Include" />
+              <e p="BookViewer.cs" t="Include" />
+              <e p="MultiPGNParser.cs" t="Include" />
+            </e>
+            <e p="FileWriter.cs" t="Include" />
+            <e p="GameViewer.cs" t="Include" />
+            <e p="PGNCreator.cs" t="Include" />
+            <e p="PGNLoader.cs" t="Include" />
+          </e>
+          <e p="Testing" t="Include">
+            <e p="Debug" t="Include">
+              <e p="BitBoardDebugViewer.cs" t="Include" />
+            </e>
+            <e p="Perft" t="Include">
+              <e p="Editor" t="Include">
+                <e p="PeftEditor.cs" t="Include" />
+              </e>
+              <e p="Expected Perft Div.txt" t="Include" />
+              <e p="Mates.txt" t="Include" />
+              <e p="Perft.cs" t="Include" />
+              <e p="PerftUtility.cs" t="Include" />
+              <e p="Suites" t="Include">
+                <e p="Suite Fast.txt" t="Include" />
+                <e p="Suite Full.txt" t="Include" />
+              </e>
+            </e>
+            <e p="Versus" t="Include">
+              <e p="VersusCommunication.cs" t="Include" />
+              <e p="VersusManager.cs" t="Include" />
+              <e p="VersusPlayer.cs" t="Include" />
+            </e>
+          </e>
+          <e p="UI" t="Include">
+            <e p="ArrowDrawer.cs" t="Include" />
+            <e p="ArrowMesh.cs" t="Include" />
+            <e p="BoardTheme.cs" t="Include" />
+            <e p="BoardUI.cs" t="Include" />
+            <e p="PieceTheme.cs" t="Include" />
+          </e>
+        </e>
+        <e p="StreamingAssets" t="Include">
+          <e p="OpeningBook.txt" t="Include" />
+          <e p="RandomNumbers.txt" t="Include" />
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Chess-AI.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
