@@ -1,4 +1,4 @@
-﻿namespace Chess {
+﻿namespace Core {
 
 	public static class BoardRepresentation {
 		public const string fileNames = "abcdefgh";

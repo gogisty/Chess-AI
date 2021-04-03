@@ -1,9 +1,8 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
-	using System.Collections;
-	using System.IO;
-	using UnityEngine;
+﻿using System.IO;
+using Core;
+using UnityEngine;
 
+namespace Other.Book {
 	public class BookCreator : MonoBehaviour {
 
 		public int maxPlyToRecord;
@@ -14,12 +13,12 @@
 		public TextAsset bookFile;
 		public bool append;
 
-		void Start () {
+		private void Start () {
 
 		}
 
 		[ContextMenu ("Create Book")]
-		void CreateBook () {
+		private void CreateBook () {
 			var sw = System.Diagnostics.Stopwatch.StartNew ();
 			Book book = new Book ();
 

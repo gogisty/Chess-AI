@@ -1,5 +1,6 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+namespace Core {
 	using static PrecomputedMoveData;
 	using static BoardRepresentation;
 
@@ -10,27 +11,27 @@
 		public PromotionMode promotionsToGenerate = PromotionMode.All;
 
 		// ---- Instance variables ----
-		List<Move> moves;
-		bool isWhiteToMove;
-		int friendlyColour;
-		int opponentColour;
-		int friendlyKingSquare;
-		int friendlyColourIndex;
-		int opponentColourIndex;
+		private List<Move> moves;
+		private bool isWhiteToMove;
+		private int friendlyColour;
+		private int opponentColour;
+		private int friendlyKingSquare;
+		private int friendlyColourIndex;
+		private int opponentColourIndex;
 
-		bool inCheck;
-		bool inDoubleCheck;
-		bool pinsExistInPosition;
-		ulong checkRayBitmask;
-		ulong pinRayBitmask;
-		ulong opponentKnightAttacks;
-		ulong opponentAttackMapNoPawns;
+		private bool inCheck;
+		private bool inDoubleCheck;
+		private bool pinsExistInPosition;
+		private ulong checkRayBitmask;
+		private ulong pinRayBitmask;
+		private ulong opponentKnightAttacks;
+		private ulong opponentAttackMapNoPawns;
 		public ulong opponentAttackMap;
 		public ulong opponentPawnAttackMap;
-		ulong opponentSlidingAttackMap;
+		private ulong opponentSlidingAttackMap;
 
-		bool genQuiets;
-		Board board;
+		private bool genQuiets;
+		private Board board;
 
 		// Generates list of legal moves in current position.
 		// Quiet moves (non captures) can optionally be excluded. This is used in quiescence search.
@@ -59,7 +60,7 @@
 			return inCheck;
 		}
 
-		void Init () {
+		private void Init () {
 			moves = new List<Move> (64);
 			inCheck = false;
 			inDoubleCheck = false;
@@ -75,7 +76,7 @@
 			opponentColourIndex = 1 - friendlyColourIndex;
 		}
 
-		void GenerateKingMoves () {
+		private void GenerateKingMoves () {
 			for (int i = 0; i < kingMoves[friendlyKingSquare].Length; i++) {
 				int targetSquare = kingMoves[friendlyKingSquare][i];
 				int pieceOnTargetSquare = board.Square[targetSquare];
@@ -123,7 +124,7 @@
 			}
 		}
 
-		void GenerateSlidingMoves () {
+		private void GenerateSlidingMoves () {
 			PieceList rooks = board.rooks[friendlyColourIndex];
 			for (int i = 0; i < rooks.Count; i++) {
 				GenerateSlidingPieceMoves (rooks[i], 0, 4);
@@ -141,7 +142,7 @@
 
 		}
 
-		void GenerateSlidingPieceMoves (int startSquare, int startDirIndex, int endDirIndex) {
+		private void GenerateSlidingPieceMoves (int startSquare, int startDirIndex, int endDirIndex) {
 			bool isPinned = IsPinned (startSquare);
 
 			// If this piece is pinned, and the king is in check, this piece cannot move
@@ -182,7 +183,7 @@
 			}
 		}
 
-		void GenerateKnightMoves () {
+		private void GenerateKnightMoves () {
 			PieceList myKnights = board.knights[friendlyColourIndex];
 
 			for (int i = 0; i < myKnights.Count; i++) {
@@ -208,7 +209,7 @@
 			}
 		}
 
-		void GeneratePawnMoves () {
+		private void GeneratePawnMoves () {
 			PieceList myPawns = board.pawns[friendlyColourIndex];
 			int pawnOffset = (friendlyColour == Piece.White) ? 8 : -8;
 			int startRank = (board.WhiteToMove) ? 1 : 6;
@@ -295,7 +296,7 @@
 			}
 		}
 
-		void MakePromotionMoves (int fromSquare, int toSquare) {
+		private void MakePromotionMoves (int fromSquare, int toSquare) {
 			moves.Add (new Move (fromSquare, toSquare, Move.Flag.PromoteToQueen));
 			if (promotionsToGenerate == PromotionMode.All) {
 				moves.Add (new Move (fromSquare, toSquare, Move.Flag.PromoteToKnight));
@@ -307,7 +308,7 @@
 
 		}
 
-		bool IsMovingAlongRay (int rayDir, int startSquare, int targetSquare) {
+		private bool IsMovingAlongRay (int rayDir, int startSquare, int targetSquare) {
 			int moveDir = directionLookup[targetSquare - startSquare + 63];
 			return (rayDir == moveDir || -rayDir == moveDir);
 		}
@@ -316,29 +317,29 @@
 		//return !((directionOffset == 1 || directionOffset == -1) && absRayOffset >= 7) && absRayOffset % directionOffset == 0;
 		//}
 
-		bool IsPinned (int square) {
+		private bool IsPinned (int square) {
 			return pinsExistInPosition && ((pinRayBitmask >> square) & 1) != 0;
 		}
 
-		bool SquareIsInCheckRay (int square) {
+		private bool SquareIsInCheckRay (int square) {
 			return inCheck && ((checkRayBitmask >> square) & 1) != 0;
 		}
 
-		bool HasKingsideCastleRight {
+		private bool HasKingsideCastleRight {
 			get {
 				int mask = (board.WhiteToMove) ? 1 : 4;
 				return (board.currentGameState & mask) != 0;
 			}
 		}
 
-		bool HasQueensideCastleRight {
+		private bool HasQueensideCastleRight {
 			get {
 				int mask = (board.WhiteToMove) ? 2 : 8;
 				return (board.currentGameState & mask) != 0;
 			}
 		}
 
-		void GenSlidingAttackMap () {
+		private void GenSlidingAttackMap () {
 			opponentSlidingAttackMap = 0;
 
 			PieceList enemyRooks = board.rooks[opponentColourIndex];
@@ -357,7 +358,7 @@
 			}
 		}
 
-		void UpdateSlidingAttackPiece (int startSquare, int startDirIndex, int endDirIndex) {
+		private void UpdateSlidingAttackPiece (int startSquare, int startDirIndex, int endDirIndex) {
 
 			for (int directionIndex = startDirIndex; directionIndex < endDirIndex; directionIndex++) {
 				int currentDirOffset = directionOffsets[directionIndex];
@@ -374,7 +375,7 @@
 			}
 		}
 
-		void CalculateAttackData () {
+		private void CalculateAttackData () {
 			GenSlidingAttackMap ();
 			// Search squares in all directions around friendly king for checks/pins by enemy sliding pieces (queen, rook, bishop)
 			int startDirIndex = 0;
@@ -483,11 +484,11 @@
 			opponentAttackMap = opponentAttackMapNoPawns | opponentPawnAttackMap;
 		}
 
-		bool SquareIsAttacked (int square) {
+		private bool SquareIsAttacked (int square) {
 			return BitBoardUtility.ContainsSquare (opponentAttackMap, square);
 		}
 
-		bool InCheckAfterEnPassant (int startSquare, int targetSquare, int epCapturedPawnSquare) {
+		private bool InCheckAfterEnPassant (int startSquare, int targetSquare, int epCapturedPawnSquare) {
 			// Update board to reflect en-passant capture
 			board.Square[targetSquare] = board.Square[startSquare];
 			board.Square[startSquare] = Piece.None;
@@ -505,7 +506,7 @@
 			return inCheckAfterEpCapture;
 		}
 
-		bool SquareAttackedAfterEPCapture (int epCaptureSquare, int capturingPawnStartSquare) {
+		private bool SquareAttackedAfterEPCapture (int epCaptureSquare, int capturingPawnStartSquare) {
 			if (BitBoardUtility.ContainsSquare (opponentAttackMapNoPawns, friendlyKingSquare)) {
 				return true;
 			}

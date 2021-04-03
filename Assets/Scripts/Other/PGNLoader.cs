@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core;
 using UnityEngine;
 
-namespace Chess {
+namespace Other {
 	using static BoardRepresentation;
 
 	public static class PGNLoader {
@@ -32,7 +32,7 @@ namespace Chess {
 			return MovesFromAlgebraic (algebraicMoves.ToArray ());
 		}
 
-		static Move[] MovesFromAlgebraic (string[] algebraicMoves) {
+		private static Move[] MovesFromAlgebraic (string[] algebraicMoves) {
 			Board board = new Board ();
 			board.LoadStartPosition ();
 			var moves = new List<Move> ();
@@ -55,7 +55,7 @@ namespace Chess {
 			return moves.ToArray ();
 		}
 
-		static Move MoveFromAlgebraic (Board board, string algebraicMove) {
+		private static Move MoveFromAlgebraic (Board board, string algebraicMove) {
 			MoveGenerator moveGenerator = new MoveGenerator ();
 
 			// Remove unrequired info from move string
@@ -152,7 +152,7 @@ namespace Chess {
 			return move;
 		}
 
-		static int GetPieceTypeFromSymbol (char symbol) {
+		private static int GetPieceTypeFromSymbol (char symbol) {
 			switch (symbol) {
 				case 'R':
 					return Piece.Rook;

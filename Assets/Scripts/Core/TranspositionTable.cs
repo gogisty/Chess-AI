@@ -1,4 +1,6 @@
-﻿namespace Chess {
+﻿using Core.AI;
+
+namespace Core {
 	// Thanks to https://web.archive.org/web/20071031100051/http://www.brucemo.com/compchess/programming/hashing.htm
 	public class TranspositionTable {
 
@@ -21,7 +23,7 @@
 
 		public readonly ulong size;
 		public bool enabled = true;
-		Board board;
+		private Board board;
 
 		public TranspositionTable (Board board, int size) {
 			this.board = board;
@@ -85,7 +87,7 @@
 			//}
 		}
 
-		int CorrectMateScoreForStorage (int score, int numPlySearched) {
+		private int CorrectMateScoreForStorage (int score, int numPlySearched) {
 			if (Search.IsMateScore (score)) {
 				int sign = System.Math.Sign (score);
 				return (score * sign + numPlySearched) * sign;
@@ -93,7 +95,7 @@
 			return score;
 		}
 
-		int CorrectRetrievedMateScore (int score, int numPlySearched) {
+		private int CorrectRetrievedMateScore (int score, int numPlySearched) {
 			if (Search.IsMateScore (score)) {
 				int sign = System.Math.Sign (score);
 				return (score * sign - numPlySearched) * sign;

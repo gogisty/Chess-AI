@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-namespace Chess.Testing {
-	[CustomEditor (typeof (Perft))]
-	public class PerftEditor : Editor {
 
-		Perft perft;
+namespace Testing.Perft.Editor {
+	[CustomEditor (typeof (Perft))]
+	public class PerftEditor : UnityEditor.Editor {
+		private Perft perft;
 
 		public override void OnInspectorGUI () {
 			DrawDefaultInspector ();
@@ -16,7 +14,7 @@ namespace Chess.Testing {
 			}
 		}
 
-		void OnEnable () {
+		private void OnEnable () {
 			perft = (Perft) target;
 		}
 	}

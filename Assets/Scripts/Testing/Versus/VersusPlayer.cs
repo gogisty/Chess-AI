@@ -1,30 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Core;
+using Core.AI;
 using TMPro;
 using UnityEngine;
 
-namespace Chess.Testing {
+namespace Testing.Versus {
 	public class VersusPlayer : MonoBehaviour {
 
 		public string playerName;
 		public AISettings aiSettings;
 
 		public TMP_Text logUI;
-		PlayerInfo playerInfo;
+		private PlayerInfo playerInfo;
 
-		bool playingAsWhite;
-		bool thinking;
+		private bool playingAsWhite;
+		private bool thinking;
 
-		Search search;
-		Move moveToMake;
-		float endThinkTime;
-		bool hasMove;
+		private Search search;
+		private Move moveToMake;
+		private float endThinkTime;
+		private bool hasMove;
 
-		int gameNumber;
-		int myNextMovePlyCount;
-		Board board;
+		private int gameNumber;
+		private int myNextMovePlyCount;
+		private Board board;
 
-		void Awake () {
+		private void Awake () {
 			board = new Board ();
 			ClearLog ();
 			search = new Search (board, aiSettings);
@@ -32,18 +32,18 @@ namespace Chess.Testing {
 
 		}
 
-		void Start () {
+		private void Start () {
 			playerInfo = new PlayerInfo () { playerName = playerName, id = System.Environment.TickCount };
 			VersusCommunication.WritePlayerInfo (playerInfo);
 		}
 
-		void Update () {
+		private void Update () {
 			if (thinking && Time.time > endThinkTime && hasMove) {
 				SubmitMove ();
 			}
 		}
 
-		void SubmitMove () {
+		private void SubmitMove () {
 
 			board.MakeMove (moveToMake);
 			playerInfo.lastMove = moveToMake.Value;
@@ -58,7 +58,7 @@ namespace Chess.Testing {
 			Log ("Submitted Move (move = " + moveToMake.Value + ")");
 		}
 
-		void StartThinking () {
+		private void StartThinking () {
 			Log ("Started thinking... ply = " + myNextMovePlyCount);
 			endThinkTime = Time.time + 1;
 			hasMove = false;
@@ -71,7 +71,7 @@ namespace Chess.Testing {
 
 		}
 
-		void ManagerUpdated (VersusInfo versusInfo) {
+		private void ManagerUpdated (VersusInfo versusInfo) {
 			Log (Time.time + " Manager updated");
 			playingAsWhite = versusInfo.whiteID == playerInfo.id;
 			if (versusInfo.gameInProgress) {
@@ -95,11 +95,11 @@ namespace Chess.Testing {
 			}
 		}
 
-		void ClearLog () {
+		private void ClearLog () {
 			logUI.text = "";
 		}
 
-		void Log (string message) {
+		private void Log (string message) {
 			logUI.text += message + "\n";
 		}
 

@@ -1,22 +1,23 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+namespace Core {
 	using static PrecomputedMoveData;
 	using static BoardRepresentation;
 	
 	public class PseudoLegalMoveGenerator {
 
 		// ---- Instance variables ----
-		List<Move> moves;
-		bool isWhiteToMove;
-		int friendlyColour;
-		int opponentColour;
-		int friendlyKingSquare;
-		int friendlyColourIndex;
-		int opponentColourIndex;
+		private List<Move> moves;
+		private bool isWhiteToMove;
+		private int friendlyColour;
+		private int opponentColour;
+		private int friendlyKingSquare;
+		private int friendlyColourIndex;
+		private int opponentColourIndex;
 
-		bool genQuiets;
-		bool genUnderpromotions;
-		Board board;
+		private bool genQuiets;
+		private bool genUnderpromotions;
+		private Board board;
 
 		// Generates list of legal moves in current position.
 		// Quiet moves (non captures) can optionally be excluded. This is used in quiescence search.
@@ -120,7 +121,7 @@
 			//return SquareAttacked (friendlyKingSquare, board.ColourToMoveIndex);
 		}
 
-		void Init () {
+		private void Init () {
 			moves = new List<Move> (64);
 
 			isWhiteToMove = board.ColourToMove == Piece.White;
@@ -131,7 +132,7 @@
 			opponentColourIndex = 1 - friendlyColourIndex;
 		}
 
-		void GenerateKingMoves () {
+		private void GenerateKingMoves () {
 			for (int i = 0; i < kingMoves[friendlyKingSquare].Length; i++) {
 				int targetSquare = kingMoves[friendlyKingSquare][i];
 				int pieceOnTargetSquare = board.Square[targetSquare];
@@ -180,7 +181,7 @@
 			}
 		}
 
-		void GenerateSlidingMoves () {
+		private void GenerateSlidingMoves () {
 			PieceList rooks = board.rooks[friendlyColourIndex];
 			for (int i = 0; i < rooks.Count; i++) {
 				GenerateSlidingPieceMoves (rooks[i], 0, 4);
@@ -198,7 +199,7 @@
 
 		}
 
-		void GenerateSlidingPieceMoves (int startSquare, int startDirIndex, int endDirIndex) {
+		private void GenerateSlidingPieceMoves (int startSquare, int startDirIndex, int endDirIndex) {
 
 			for (int directionIndex = startDirIndex; directionIndex < endDirIndex; directionIndex++) {
 				int currentDirOffset = directionOffsets[directionIndex];
@@ -226,7 +227,7 @@
 			}
 		}
 
-		void GenerateKnightMoves () {
+		private void GenerateKnightMoves () {
 			PieceList myKnights = board.knights[friendlyColourIndex];
 
 			for (int i = 0; i < myKnights.Count; i++) {
@@ -247,7 +248,7 @@
 			}
 		}
 
-		void GeneratePawnMoves () {
+		private void GeneratePawnMoves () {
 			PieceList myPawns = board.pawns[friendlyColourIndex];
 			int pawnOffset = (friendlyColour == Piece.White) ? 8 : -8;
 			int startRank = (board.WhiteToMove) ? 1 : 6;
@@ -323,7 +324,7 @@
 			}
 		}
 
-		void MakePromotionMoves (int fromSquare, int toSquare) {
+		private void MakePromotionMoves (int fromSquare, int toSquare) {
 			moves.Add (new Move (fromSquare, toSquare, Move.Flag.PromoteToQueen));
 			if (genUnderpromotions) {
 				moves.Add (new Move (fromSquare, toSquare, Move.Flag.PromoteToKnight));
@@ -332,14 +333,14 @@
 			}
 		}
 
-		bool HasKingsideCastleRight {
+		private bool HasKingsideCastleRight {
 			get {
 				int mask = (board.WhiteToMove) ? 1 : 4;
 				return (board.currentGameState & mask) != 0;
 			}
 		}
 
-		bool HasQueensideCastleRight {
+		private bool HasQueensideCastleRight {
 			get {
 				int mask = (board.WhiteToMove) ? 2 : 8;
 				return (board.currentGameState & mask) != 0;

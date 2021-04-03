@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Core.AI;
+using Other;
+using UI;
 using UnityEngine;
 
-namespace Chess.Game {
+namespace Core {
 	public class GameManager : MonoBehaviour {
 
 		public enum Result { Playing, WhiteIsMated, BlackIsMated, Stalemate, Repetition, FiftyMoveRule, InsufficientMaterial }
@@ -27,19 +29,19 @@ namespace Chess.Game {
 		public TMPro.TMP_Text aiDiagnosticsUI;
 		public TMPro.TMP_Text resultUI;
 
-		Result gameResult;
+		private Result gameResult;
 
-		Player whitePlayer;
-		Player blackPlayer;
-		Player playerToMove;
-		List<Move> gameMoves;
-		BoardUI boardUI;
+		private Player whitePlayer;
+		private Player blackPlayer;
+		private Player playerToMove;
+		private List<Move> gameMoves;
+		private BoardUI boardUI;
 
 		public ulong zobristDebug;
 		public Board board { get; private set; }
-		Board searchBoard; // Duplicate version of board used for ai search
+		private Board searchBoard; // Duplicate version of board used for ai search
 
-		void Start () {
+		private void Start () {
 			//Application.targetFrameRate = 60;
 
 			if (useClocks) {
@@ -57,7 +59,7 @@ namespace Chess.Game {
 
 		}
 
-		void Update () {
+		private void Update () {
 			zobristDebug = board.ZobristKey;
 
 			if (gameResult == Result.Playing) {
@@ -77,7 +79,7 @@ namespace Chess.Game {
 
 		}
 
-		void OnMoveChosen (Move move) {
+		private void OnMoveChosen (Move move) {
 			bool animateMove = playerToMove is AIPlayer;
 			board.MakeMove (move);
 			searchBoard.MakeMove (move);
@@ -99,7 +101,7 @@ namespace Chess.Game {
 			NewGame (PlayerType.AI, PlayerType.AI);
 		}
 
-		void NewGame (PlayerType whitePlayerType, PlayerType blackPlayerType) {
+		private void NewGame (PlayerType whitePlayerType, PlayerType blackPlayerType) {
 			gameMoves.Clear ();
 			if (loadCustomPosition) {
 				board.LoadPosition (customPosition);
@@ -122,7 +124,7 @@ namespace Chess.Game {
 
 		}
 
-		void LogAIDiagnostics () {
+		private void LogAIDiagnostics () {
 			string text = "";
 			var d = aiSettings.diagnostics;
 			//text += "AI Diagnostics";
@@ -166,7 +168,7 @@ namespace Chess.Game {
 			Application.Quit ();
 		}
 
-		void NotifyPlayerToMove () {
+		private void NotifyPlayerToMove () {
 			gameResult = GetGameState ();
 			PrintGameResult (gameResult);
 
@@ -179,7 +181,7 @@ namespace Chess.Game {
 			}
 		}
 
-		void PrintGameResult (Result result) {
+		private void PrintGameResult (Result result) {
 			float subtitleSize = resultUI.fontSize * 0.75f;
 			string subtitleSettings = $"<color=#787878> <size={subtitleSize}>";
 
@@ -202,7 +204,7 @@ namespace Chess.Game {
 			}
 		}
 
-		Result GetGameState () {
+		private Result GetGameState () {
 			MoveGenerator moveGenerator = new MoveGenerator ();
 			var moves = moveGenerator.GenerateMoves (board);
 
@@ -241,7 +243,7 @@ namespace Chess.Game {
 			return Result.Playing;
 		}
 
-		void CreatePlayer (ref Player player, PlayerType playerType) {
+		private void CreatePlayer (ref Player player, PlayerType playerType) {
 			if (player != null) {
 				player.onMoveChosen -= OnMoveChosen;
 			}

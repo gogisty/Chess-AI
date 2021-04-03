@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-namespace Chess {
+
+namespace Core {
 	public static class Zobrist {
-		const int seed = 2361912;
-		const string randomNumbersFileName = "RandomNumbers.txt";
+		private const int seed = 2361912;
+		private const string randomNumbersFileName = "RandomNumbers.txt";
 
 		/// piece type, colour, square index
 		public static readonly ulong[, , ] piecesArray = new ulong[8, 2, 64];
@@ -15,9 +15,9 @@ namespace Chess {
 		public static readonly ulong[] enPassantFile = new ulong[9]; // no need for rank info as side to move is included in key
 		public static readonly ulong sideToMove;
 
-		static System.Random prng = new System.Random (seed);
+		private static System.Random prng = new System.Random (seed);
 
-		static void WriteRandomNumbers () {
+		private static void WriteRandomNumbers () {
 			prng = new System.Random (seed);
 			string randomNumberString = "";
 			int numRandomNumbers = 64 * 8 * 2 + castlingRights.Length + 9 + 1;
@@ -33,7 +33,7 @@ namespace Chess {
 			writer.Close ();
 		}
 
-		static Queue<ulong> ReadRandomNumbers () {
+		private static Queue<ulong> ReadRandomNumbers () {
 			if (!File.Exists (randomNumbersPath)) {
 				Debug.Log ("Create");
 				WriteRandomNumbers ();
@@ -101,13 +101,13 @@ namespace Chess {
 			return zobristKey;
 		}
 
-		static string randomNumbersPath {
+		private static string randomNumbersPath {
 			get {
 				return Path.Combine (Application.streamingAssetsPath, randomNumbersFileName);
 			}
 		}
 
-		static ulong RandomUnsigned64BitNumber () {
+		private static ulong RandomUnsigned64BitNumber () {
 			byte[] buffer = new byte[8];
 			prng.NextBytes (buffer);
 			return BitConverter.ToUInt64 (buffer, 0);

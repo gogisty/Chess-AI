@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Chess {
+namespace Core.AI {
 	public class MoveOrdering {
+		private int[] moveScores;
+		private const int maxMoveCount = 218;
 
-		int[] moveScores;
-		const int maxMoveCount = 218;
+		private const int squareControlledByOpponentPawnPenalty = 350;
+		private const int capturedPieceValueMultiplier = 10;
 
-		const int squareControlledByOpponentPawnPenalty = 350;
-		const int capturedPieceValueMultiplier = 10;
-
-		MoveGenerator moveGenerator;
-		TranspositionTable transpositionTable;
-		Move invalidMove;
+		private MoveGenerator moveGenerator;
+		private TranspositionTable transpositionTable;
+		private Move invalidMove;
 
 		public MoveOrdering (MoveGenerator moveGenerator, TranspositionTable tt) {
 			moveScores = new int[maxMoveCount];
@@ -66,7 +64,7 @@ namespace Chess {
 			Sort (moves);
 		}
 
-		static int GetPieceValue (int pieceType) {
+		private static int GetPieceValue (int pieceType) {
 			switch (pieceType) {
 				case Piece.Queen:
 					return Evaluation.queenValue;
@@ -83,7 +81,7 @@ namespace Chess {
 			}
 		}
 
-		void Sort (List<Move> moves) {
+		private void Sort (List<Move> moves) {
 			// Sort the moves list based on scores
 			for (int i = 0; i < moves.Count - 1; i++) {
 				for (int j = i + 1; j > 0; j--) {

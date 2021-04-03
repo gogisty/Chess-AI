@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UI;
 using UnityEngine;
 
-namespace Chess.Game {
+namespace Core {
 	public class HumanPlayer : Player {
 
 		public enum InputState {
@@ -11,12 +10,12 @@ namespace Chess.Game {
 			DraggingPiece
 		}
 
-		InputState currentState;
+		private InputState currentState;
 
-		BoardUI boardUI;
-		Camera cam;
-		Coord selectedPieceSquare;
-		Board board;
+		private BoardUI boardUI;
+		private Camera cam;
+		private Coord selectedPieceSquare;
+		private Board board;
 		public HumanPlayer (Board board) {
 			boardUI = GameObject.FindObjectOfType<BoardUI> ();
 			cam = Camera.main;
@@ -31,7 +30,7 @@ namespace Chess.Game {
 			HandleInput ();
 		}
 
-		void HandleInput () {
+		private void HandleInput () {
 			Vector2 mousePos = cam.ScreenToWorldPoint (Input.mousePosition);
 
 			if (currentState == InputState.None) {
@@ -47,13 +46,13 @@ namespace Chess.Game {
 			}
 		}
 
-		void HandlePointAndClickMovement (Vector2 mousePos) {
+		private void HandlePointAndClickMovement (Vector2 mousePos) {
 			if (Input.GetMouseButton (0)) {
 				HandlePiecePlacement (mousePos);
 			}
 		}
 
-		void HandleDragMovement (Vector2 mousePos) {
+		private void HandleDragMovement (Vector2 mousePos) {
 			boardUI.DragPiece (selectedPieceSquare, mousePos);
 			// If mouse is released, then try place the piece
 			if (Input.GetMouseButtonUp (0)) {
@@ -61,7 +60,7 @@ namespace Chess.Game {
 			}
 		}
 
-		void HandlePiecePlacement (Vector2 mousePos) {
+		private void HandlePiecePlacement (Vector2 mousePos) {
 			Coord targetSquare;
 			if (boardUI.TryGetSquareUnderMouse (mousePos, out targetSquare)) {
 				if (targetSquare.Equals (selectedPieceSquare)) {
@@ -87,7 +86,7 @@ namespace Chess.Game {
 
 		}
 
-		void CancelPieceSelection () {
+		private void CancelPieceSelection () {
 			if (currentState != InputState.None) {
 				currentState = InputState.None;
 				boardUI.DeselectSquare (selectedPieceSquare);
@@ -95,7 +94,7 @@ namespace Chess.Game {
 			}
 		}
 
-		void TryMakeMove (Coord startSquare, Coord targetSquare) {
+		private void TryMakeMove (Coord startSquare, Coord targetSquare) {
 			int startIndex = BoardRepresentation.IndexFromCoord (startSquare);
 			int targetIndex = BoardRepresentation.IndexFromCoord (targetSquare);
 			bool moveIsLegal = false;
@@ -132,7 +131,7 @@ namespace Chess.Game {
 			}
 		}
 
-		void HandlePieceSelection (Vector2 mousePos) {
+		private void HandlePieceSelection (Vector2 mousePos) {
 			if (Input.GetMouseButtonDown (0)) {
 				if (boardUI.TryGetSquareUnderMouse (mousePos, out selectedPieceSquare)) {
 					int index = BoardRepresentation.IndexFromCoord (selectedPieceSquare);

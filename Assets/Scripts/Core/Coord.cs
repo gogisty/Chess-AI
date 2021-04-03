@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Chess {
+
+namespace Core {
 	public struct Coord : IComparable<Coord> {
 		public readonly int fileIndex;
 		public readonly int rankIndex;

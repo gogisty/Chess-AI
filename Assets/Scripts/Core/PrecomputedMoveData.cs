@@ -1,5 +1,6 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+namespace Core {
 	using static System.Math;
 
 	public static class PrecomputedMoveData {

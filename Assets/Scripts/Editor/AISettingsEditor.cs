@@ -1,12 +1,10 @@
-﻿namespace Chess.EditorScripts {
+﻿using Core.AI;
+using UnityEditor;
+using UnityEngine;
 
-	using System.Collections.Generic;
-	using System.Collections;
-	using UnityEditor;
-	using UnityEngine;
-
+namespace Editor {
 	[CustomEditor (typeof (AISettings))]
-	public class AISettingsEditor : Editor {
+	public class AISettingsEditor : UnityEditor.Editor {
 
 		public override void OnInspectorGUI () {
 			DrawDefaultInspector ();

@@ -1,8 +1,8 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
-	public static class FenUtility {
+﻿using System.Collections.Generic;
 
-		static Dictionary<char, int> pieceTypeFromSymbol = new Dictionary<char, int> () {
+namespace Core {
+	public static class FenUtility {
+		private static Dictionary<char, int> pieceTypeFromSymbol = new Dictionary<char, int> () {
 			['k'] = Piece.King, ['p'] = Piece.Pawn, ['n'] = Piece.Knight, ['b'] = Piece.Bishop, ['r'] = Piece.Rook, ['q'] = Piece.Queen
 		};
 

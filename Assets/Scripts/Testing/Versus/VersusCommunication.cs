@@ -1,23 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
-namespace Chess.Testing {
+namespace Testing.Versus {
 	public class VersusCommunication : MonoBehaviour {
-		const string folderName = "Communication";
-		const string playerFileExtention = ".player";
-		const string managerFileName = "Manager";
-		const string managerExtension = ".json";
+		private const string folderName = "Communication";
+		private const string playerFileExtention = ".player";
+		private const string managerFileName = "Manager";
+		private const string managerExtension = ".json";
 
 		public event System.Action<PlayerInfo> onPlayerUpdated;
 		public event System.Action<VersusInfo> onManagerUpdated;
 
-		FileSystemWatcher communicationWatcher;
-		bool communicationAlert;
-		System.IO.FileSystemEventArgs communicationArgs;
+		private FileSystemWatcher communicationWatcher;
+		private bool communicationAlert;
+		private System.IO.FileSystemEventArgs communicationArgs;
 
-		void Awake () {
+		private void Awake () {
 			Directory.CreateDirectory (CommunicationPath);
 			communicationWatcher = new FileSystemWatcher (Path.GetFullPath (CommunicationPath));
 			communicationWatcher.NotifyFilter = NotifyFilters.LastWrite;
@@ -27,7 +25,7 @@ namespace Chess.Testing {
 			communicationWatcher.EnableRaisingEvents = true;
 		}
 
-		void Update () {
+		private void Update () {
 			if (communicationAlert) {
 				communicationAlert = false;
 
@@ -41,7 +39,7 @@ namespace Chess.Testing {
 			}
 		}
 
-		void CommunicationFileChanged (object sender, System.IO.FileSystemEventArgs e) {
+		private void CommunicationFileChanged (object sender, System.IO.FileSystemEventArgs e) {
 			// Note that this is called from different thread than Unity main thread, so need to set a flag
 			// to pick it up on main thread
 			communicationArgs = e;
@@ -69,7 +67,7 @@ namespace Chess.Testing {
 			return Directory.GetFiles (CommunicationPath, "*" + playerFileExtention);
 		}
 
-		static string testData;
+		private static string testData;
 
 		public static PlayerInfo GetPlayerInfo (string path) {
 			string data = Read (path);
@@ -87,25 +85,25 @@ namespace Chess.Testing {
 			Write (data, path);
 		}
 
-		static string CommunicationPath {
+		private static string CommunicationPath {
 			get {
 				return Path.Combine (".", folderName);
 			}
 		}
 
-		static string ManagerFilePath {
+		private static string ManagerFilePath {
 			get {
 				return Path.Combine (CommunicationPath, managerFileName + managerExtension);
 			}
 		}
 
-		static void Write (string data, string path) {
+		private static void Write (string data, string path) {
 			StreamWriter writer = new StreamWriter (path);
 			writer.Write (data);
 			writer.Close ();
 		}
 
-		static string Read (string path) {
+		private static string Read (string path) {
 
 			StreamReader reader = new StreamReader (path);
 			string data = reader.ReadToEnd ();

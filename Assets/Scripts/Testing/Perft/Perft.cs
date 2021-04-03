@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core;
 using UnityEngine;
-namespace Chess.Testing {
+
+namespace Testing.Perft {
 	public class Perft : MonoBehaviour {
 
 		[Header ("Single Test")]
@@ -20,15 +22,16 @@ namespace Chess.Testing {
 		public TMPro.TMP_Text logUI;
 		public UnityEngine.UI.Toggle timingStatsToggle;
 
-		Dictionary<string, int> perftDivideResults;
-		MoveGenerator moveGenerator;
-		Board board;
-		// Timers
-		System.Diagnostics.Stopwatch makeMoveTimer;
-		System.Diagnostics.Stopwatch unmakeMoveTimer;
-		System.Diagnostics.Stopwatch moveGenTimer;
+		private Dictionary<string, int> perftDivideResults;
+		private MoveGenerator moveGenerator;
 
-		void Start () {
+		private Board board;
+		// Timers
+		private System.Diagnostics.Stopwatch makeMoveTimer;
+		private System.Diagnostics.Stopwatch unmakeMoveTimer;
+		private System.Diagnostics.Stopwatch moveGenTimer;
+
+		private void Start () {
 			board = new Board ();
 			timingStatsToggle.SetIsOnWithoutNotify (enableTimingStats);
 			timingStatsToggle.onValueChanged.AddListener ((v) => enableTimingStats = v);
@@ -36,7 +39,7 @@ namespace Chess.Testing {
 			moveGenerator = new MoveGenerator ();
 		}
 
-		void Update () {
+		private void Update () {
 
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				UnityEngine.Profiling.Profiler.BeginSample ("Chess Test");
@@ -133,7 +136,7 @@ namespace Chess.Testing {
 
 		}
 
-		int Search (int depth) {
+		private int Search (int depth) {
 			var moves = moveGenerator.GenerateMoves (board);
 
 			if (depth == 1) {
@@ -151,7 +154,7 @@ namespace Chess.Testing {
 			return numLocalNodes;
 		}
 
-		int SearchWithTimingStats (int depth, bool batchMode = true) {
+		private int SearchWithTimingStats (int depth, bool batchMode = true) {
 			if (depth == 0 && !batchMode) {
 				return 1;
 			}
@@ -178,7 +181,7 @@ namespace Chess.Testing {
 			return numLocalNodes;
 		}
 
-		int SearchDivide (int startDepth, int currentDepth) {
+		private int SearchDivide (int startDepth, int currentDepth) {
 
 			var moves = moveGenerator.GenerateMoves (board);
 
@@ -202,7 +205,7 @@ namespace Chess.Testing {
 			return numLocalNodes;
 		}
 
-		void ComparePerftDivideResults (string fen) {
+		private void ComparePerftDivideResults (string fen) {
 			string[] expected = expectedResults.text.Split ('\n');
 			Dictionary<string, int> expectedPerftDResults = new Dictionary<string, int> ();
 			foreach (string line in expected) {
@@ -230,23 +233,23 @@ namespace Chess.Testing {
 							}
 						}
 
-						Debug.Log (string.Format ("{0}: Expected {1} but had {2}", move, expectedValue, actualValue));
-						Debug.Log ("Fen after this move: " + FenUtility.CurrentFen (board));
+						UnityEngine.Debug.Log (string.Format ("{0}: Expected {1} but had {2}", move, expectedValue, actualValue));
+						UnityEngine.Debug.Log ("Fen after this move: " + FenUtility.CurrentFen (board));
 					}
 				} else {
-					Debug.Log ("Expected move: " + move + ", but was not found.");
+					UnityEngine.Debug.Log ("Expected move: " + move + ", but was not found.");
 				}
 			}
 		}
 
-		void LogMessage (string message) {
-			Debug.Log (message);
+		private void LogMessage (string message) {
+			UnityEngine.Debug.Log (message);
 			if (Application.isPlaying) {
 				logUI.text += message + "\n";
 			}
 		}
 
-		void ClearLog () {
+		private void ClearLog () {
 			if (Application.isPlaying) {
 				logUI.text = "";
 			}

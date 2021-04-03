@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core;
 using UnityEngine;
 
-namespace Chess.Game {
+namespace UI {
 	public class ArrowDrawer : MonoBehaviour {
 
 		public Color arrowColA;
@@ -10,19 +10,19 @@ namespace Chess.Game {
 		public float lineWidth;
 		public float headSize;
 		public Material material;
-		List<Transform> activeArrows;
-		BoardUI boardUI;
-		Camera cam;
-		bool isDrawing;
-		Coord startCoord;
+		private List<Transform> activeArrows;
+		private BoardUI boardUI;
+		private Camera cam;
+		private bool isDrawing;
+		private Coord startCoord;
 
-		void Start () {
+		private void Start () {
 			activeArrows = new List<Transform> ();
 			boardUI = FindObjectOfType<BoardUI> ();
 			cam = Camera.main;
 		}
 
-		void Update () {
+		private void Update () {
 			var mousePos = cam.ScreenToWorldPoint (Input.mousePosition);
 			if (Input.GetMouseButtonDown (1)) {
 				isDrawing = boardUI.TryGetSquareUnderMouse (mousePos, out startCoord);
@@ -42,14 +42,14 @@ namespace Chess.Game {
 			}
 		}
 
-		void ClearArrows () {
+		private void ClearArrows () {
 			for (int i = activeArrows.Count - 1; i >= 0; i--) {
 				Destroy (activeArrows[i].gameObject);
 			}
 			activeArrows.Clear ();
 		}
 
-		void CreateArrow (Vector2 startPos, Vector2 endPos, Color col) {
+		private void CreateArrow (Vector2 startPos, Vector2 endPos, Color col) {
 			GameObject meshHolder = new GameObject ("Arrow");
 			meshHolder.layer = LayerMask.NameToLayer ("Arrows");
 			meshHolder.transform.parent = transform;

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chess {
+﻿namespace Core.AI {
 	public class Evaluation {
 
 		public const int pawnValue = 100;
@@ -11,8 +7,8 @@ namespace Chess {
 		public const int rookValue = 500;
 		public const int queenValue = 900;
 
-		const float endgameMaterialStart = rookValue * 2 + bishopValue + knightValue;
-		Board board;
+		private const float endgameMaterialStart = rookValue * 2 + bishopValue + knightValue;
+		private Board board;
 
 		// Performs static evaluation of the current position.
 		// The position is assumed to be 'quiet', i.e no captures are available that could drastically affect the evaluation.
@@ -45,12 +41,12 @@ namespace Chess {
 			return eval * perspective;
 		}
 
-		float EndgamePhaseWeight (int materialCountWithoutPawns) {
+		private float EndgamePhaseWeight (int materialCountWithoutPawns) {
 			const float multiplier = 1 / endgameMaterialStart;
 			return 1 - System.Math.Min (1, materialCountWithoutPawns * multiplier);
 		}
 
-		int MopUpEval (int friendlyIndex, int opponentIndex, int myMaterial, int opponentMaterial, float endgameWeight) {
+		private int MopUpEval (int friendlyIndex, int opponentIndex, int myMaterial, int opponentMaterial, float endgameWeight) {
 			int mopUpScore = 0;
 			if (myMaterial > opponentMaterial + pawnValue * 2 && endgameWeight > 0) {
 
@@ -65,7 +61,7 @@ namespace Chess {
 			return 0;
 		}
 
-		int CountMaterial (int colourIndex) {
+		private int CountMaterial (int colourIndex) {
 			int material = 0;
 			material += board.pawns[colourIndex].Count * pawnValue;
 			material += board.knights[colourIndex].Count * knightValue;
@@ -76,7 +72,7 @@ namespace Chess {
 			return material;
 		}
 
-		int EvaluatePieceSquareTables (int colourIndex, float endgamePhaseWeight) {
+		private int EvaluatePieceSquareTables (int colourIndex, float endgamePhaseWeight) {
 			int value = 0;
 			bool isWhite = colourIndex == Board.WhiteIndex;
 			value += EvaluatePieceSquareTable (PieceSquareTable.pawns, board.pawns[colourIndex], isWhite);
@@ -91,7 +87,7 @@ namespace Chess {
 			return value;
 		}
 
-		static int EvaluatePieceSquareTable (int[] table, PieceList pieceList, bool isWhite) {
+		private static int EvaluatePieceSquareTable (int[] table, PieceList pieceList, bool isWhite) {
 			int value = 0;
 			for (int i = 0; i < pieceList.Count; i++) {
 				value += PieceSquareTable.Read (table, pieceList[i], isWhite);

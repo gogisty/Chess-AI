@@ -1,9 +1,9 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
-	using System.Collections;
-	using Chess.Game;
-	using UnityEngine;
+﻿using System.Collections.Generic;
+using Core;
+using UI;
+using UnityEngine;
 
+namespace Other.Book {
 	public class BookViewer : MonoBehaviour {
 		public TextAsset bookFile;
 		public float arrowWidth = 0.1f;
@@ -11,17 +11,17 @@
 		public Material arrowMaterial;
 		public Color mostCommonCol;
 		public Color rarestCol;
-		BoardUI boardUI;
+		private BoardUI boardUI;
 
-		Book book;
-		Player player;
+		private Book book;
+		private Player player;
 
-		List<GameObject> arrowObjects;
-		int arrowIndex;
-		Board board;
-		Stack<Move> moves;
+		private List<GameObject> arrowObjects;
+		private int arrowIndex;
+		private Board board;
+		private Stack<Move> moves;
 
-		void Start () {
+		private void Start () {
 			moves = new Stack<Move> ();
 			arrowObjects = new List<GameObject> ();
 			board = new Board ();
@@ -39,7 +39,7 @@
 			DrawBookMoves ();
 		}
 
-		void Update () {
+		private void Update () {
 			if (Input.GetKeyDown (KeyCode.U)) {
 				if (moves.Count > 0) {
 					var move = moves.Pop ();
@@ -57,7 +57,7 @@
 			player.Update ();
 		}
 
-		void DrawBookMoves () {
+		private void DrawBookMoves () {
 			ClearArrows ();
 			arrowIndex = 0;
 
@@ -87,7 +87,7 @@
 			}
 		}
 
-		void OnMoveChosen (Move move) {
+		private void OnMoveChosen (Move move) {
 			board.MakeMove (move);
 			moves.Push (move);
 			boardUI.OnMoveMade (board, move);
@@ -95,7 +95,7 @@
 		}
 
 		/// Draw a 2D arrow (on xy plane)
-		void DrawArrow2D (Vector2 start, Vector2 end, float lineWidth, float headSize, Color color, bool flatHead = true, float zPos = 0) {
+		private void DrawArrow2D (Vector2 start, Vector2 end, float lineWidth, float headSize, Color color, bool flatHead = true, float zPos = 0) {
 			if (arrowIndex >= arrowObjects.Count) {
 				GameObject arrowObject = new GameObject ("Arrow");
 				arrowObject.transform.parent = transform;
@@ -115,7 +115,7 @@
 			arrowIndex++;
 		}
 
-		void ClearArrows () {
+		private void ClearArrows () {
 			for (int i = 0; i < arrowObjects.Count; i++) {
 				arrowObjects[i].SetActive (false);
 			}

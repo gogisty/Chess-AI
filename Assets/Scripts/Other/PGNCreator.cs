@@ -1,4 +1,6 @@
-﻿namespace Chess {
+﻿using Core;
+
+namespace Other {
 	public static class PGNCreator {
 
 		public static string CreatePGN (Move[] moves) {
@@ -25,7 +27,7 @@
 			return NotationFromMove (board, move);
 		}
 
-		static string NotationFromMove (Board board, Move move) {
+		private static string NotationFromMove (Board board, Move move) {
 
 			MoveGenerator moveGen = new MoveGenerator ();
 
@@ -104,7 +106,7 @@
 			return moveNotation;
 		}
 
-		static string GetSymbolFromPieceType (int pieceType) {
+		private static string GetSymbolFromPieceType (int pieceType) {
 			switch (pieceType) {
 				case Piece.Rook:
 					return "R";

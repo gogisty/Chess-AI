@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Core;
 using UnityEngine;
 
-namespace Chess.Game {
+namespace UI {
 	public class BoardUI : MonoBehaviour {
 		public PieceTheme pieceTheme;
 		public BoardTheme boardTheme;
@@ -9,15 +10,15 @@ namespace Chess.Game {
 
 		public bool whiteIsBottom = true;
 
-		MeshRenderer[, ] squareRenderers;
-		SpriteRenderer[, ] squarePieceRenderers;
-		Move lastMadeMove;
-		MoveGenerator moveGenerator;
+		private MeshRenderer[, ] squareRenderers;
+		private SpriteRenderer[, ] squarePieceRenderers;
+		private Move lastMadeMove;
+		private MoveGenerator moveGenerator;
 
-		const float pieceDepth = -0.1f;
-		const float pieceDragDepth = -0.2f;
+		private const float pieceDepth = -0.1f;
+		private const float pieceDragDepth = -0.2f;
 
-		void Awake () {
+		private void Awake () {
 			moveGenerator = new MoveGenerator ();
 			CreateBoardUI ();
 
@@ -90,7 +91,7 @@ namespace Chess.Game {
 			}
 		}
 
-		IEnumerator AnimateMove (Move move, Board board) {
+		private IEnumerator AnimateMove (Move move, Board board) {
 			float t = 0;
 			const float moveAnimDuration = 0.15f;
 			Coord startCoord = BoardRepresentation.CoordFromIndex (move.StartSquare);
@@ -110,12 +111,12 @@ namespace Chess.Game {
 			pieceT.position = startPos;
 		}
 
-		void HighlightMove (Move move) {
+		private void HighlightMove (Move move) {
 			SetSquareColour (BoardRepresentation.CoordFromIndex (move.StartSquare), boardTheme.lightSquares.moveFromHighlight, boardTheme.darkSquares.moveFromHighlight);
 			SetSquareColour (BoardRepresentation.CoordFromIndex (move.TargetSquare), boardTheme.lightSquares.moveToHighlight, boardTheme.darkSquares.moveToHighlight);
 		}
 
-		void CreateBoardUI () {
+		private void CreateBoardUI () {
 
 			Shader squareShader = Shader.Find ("Unlit/Color");
 			squareRenderers = new MeshRenderer[8, 8];
@@ -145,7 +146,7 @@ namespace Chess.Game {
 			ResetSquareColours ();
 		}
 
-		void ResetSquarePositions () {
+		private void ResetSquarePositions () {
 			for (int rank = 0; rank < 8; rank++) {
 				for (int file = 0; file < 8; file++) {
 					if (file == 0 && rank == 0) {
@@ -181,7 +182,7 @@ namespace Chess.Game {
 			}
 		}
 
-		void SetSquareColour (Coord square, Color lightCol, Color darkCol) {
+		private void SetSquareColour (Coord square, Color lightCol, Color darkCol) {
 			squareRenderers[square.fileIndex, square.rankIndex].material.color = (square.IsLightSquare ()) ? lightCol : darkCol;
 		}
 

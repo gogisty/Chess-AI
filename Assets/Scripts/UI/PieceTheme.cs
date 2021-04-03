@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 
-namespace Chess.Game {
+namespace UI {
 	[CreateAssetMenu (menuName = "Theme/Pieces")]
 	public class PieceTheme : ScriptableObject {
 

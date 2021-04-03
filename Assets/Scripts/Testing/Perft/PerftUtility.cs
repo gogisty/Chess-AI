@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-namespace Chess.Testing {
+﻿using Core;
+
+namespace Testing.Perft {
 	public static class PerftUtility {
 
 		// Move name matching stockfish command line output format (for perft comparison)

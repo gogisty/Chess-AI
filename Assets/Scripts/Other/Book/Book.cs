@@ -1,8 +1,7 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
-	using System.Collections;
-	using UnityEngine;
+﻿using System.Collections.Generic;
+using Core;
 
+namespace Other.Book {
 	[System.Serializable]
 	public class Book {
 
@@ -70,7 +69,7 @@
 			return new Move (moves[0]);
 		}
 
-		void SmoothWeights (float[] weights, float strength = 0.1f) {
+		private void SmoothWeights (float[] weights, float strength = 0.1f) {
 			float sum = 0;
 			for (int i = 0; i < weights.Length; i++) {
 				sum += weights[i];

@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Chess.Game;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Chess.Testing {
+namespace Testing.Versus {
 	public class VersusManager : MonoBehaviour {
 
 		/*

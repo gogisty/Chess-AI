@@ -1,19 +1,21 @@
-﻿namespace Chess.Game {
-	using System.Threading.Tasks;
-	using System.Threading;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Core.AI;
+using Other;
+using Other.Book;
 
+namespace Core {
 	public class AIPlayer : Player {
+		private const int bookMoveDelayMillis = 250;
 
-		const int bookMoveDelayMillis = 250;
+		private Search search;
+		private AISettings settings;
+		private bool moveFound;
+		private Move move;
+		private Board board;
+		private CancellationTokenSource cancelSearchTimer;
 
-		Search search;
-		AISettings settings;
-		bool moveFound;
-		Move move;
-		Board board;
-		CancellationTokenSource cancelSearchTimer;
-
-		Book book;
+		private Book book;
 
 		public AIPlayer (Board board, AISettings settings) {
 			this.settings = settings;
@@ -58,19 +60,19 @@
 			} else {
 			
 				search.searchDiagnostics.isBook = true;
-				search.searchDiagnostics.moveVal = Chess.PGNCreator.NotationFromMove (FenUtility.CurrentFen(board), bookMove);
+				search.searchDiagnostics.moveVal = PGNCreator.NotationFromMove (FenUtility.CurrentFen(board), bookMove);
 				settings.diagnostics = search.searchDiagnostics;
 				Task.Delay (bookMoveDelayMillis).ContinueWith ((t) => PlayBookMove (bookMove));
 				
 			}
 		}
 
-		void StartSearch () {
+		private void StartSearch () {
 			search.StartSearch ();
 			moveFound = true;
 		}
 
-		void StartThreadedSearch () {
+		private void StartThreadedSearch () {
 			//Thread thread = new Thread (new ThreadStart (search.StartSearch));
 			//thread.Start ();
 			Task.Factory.StartNew (() => search.StartSearch (), TaskCreationOptions.LongRunning);
@@ -83,18 +85,18 @@
 		}
 
 		// Note: called outside of Unity main thread
-		void TimeOutThreadedSearch () {
+		private void TimeOutThreadedSearch () {
 			if (cancelSearchTimer == null || !cancelSearchTimer.IsCancellationRequested) {
 				search.EndSearch ();
 			}
 		}
 
-		void PlayBookMove(Move bookMove) {
+		private void PlayBookMove(Move bookMove) {
 			this.move = bookMove;
 			moveFound = true;
 		}
 
-		void OnSearchComplete (Move move) {
+		private void OnSearchComplete (Move move) {
 			// Cancel search timer in case search finished before timer ran out (can happen when a mate is found)
 			cancelSearchTimer?.Cancel ();
 			moveFound = true;

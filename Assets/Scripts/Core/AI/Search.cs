@@ -1,41 +1,41 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
-	using System.Threading;
-	using UnityEngine;
+﻿using System.Collections.Generic;
+using Other;
+using UnityEngine;
+
+namespace Core.AI {
 	using static System.Math;
 
 	public class Search {
-
-		const int transpositionTableSize = 64000;
-		const int immediateMateScore = 100000;
-		const int positiveInfinity = 9999999;
-		const int negativeInfinity = -positiveInfinity;
+		private const int transpositionTableSize = 64000;
+		private const int immediateMateScore = 100000;
+		private const int positiveInfinity = 9999999;
+		private const int negativeInfinity = -positiveInfinity;
 
 		public event System.Action<Move> onSearchComplete;
 
-		TranspositionTable tt;
-		MoveGenerator moveGenerator;
+		private TranspositionTable tt;
+		private MoveGenerator moveGenerator;
 
-		Move bestMoveThisIteration;
-		int bestEvalThisIteration;
-		Move bestMove;
-		int bestEval;
-		int currentIterativeSearchDepth;
-		bool abortSearch;
+		private Move bestMoveThisIteration;
+		private int bestEvalThisIteration;
+		private Move bestMove;
+		private int bestEval;
+		private int currentIterativeSearchDepth;
+		private bool abortSearch;
 
-		Move invalidMove;
-		MoveOrdering moveOrdering;
-		AISettings settings;
-		Board board;
-		Evaluation evaluation;
+		private Move invalidMove;
+		private MoveOrdering moveOrdering;
+		private AISettings settings;
+		private Board board;
+		private Evaluation evaluation;
 
 		// Diagnostics
 		public SearchDiagnostics searchDiagnostics;
-		int numNodes;
-		int numQNodes;
-		int numCutoffs;
-		int numTranspositions;
-		System.Diagnostics.Stopwatch searchStopwatch;
+		private int numNodes;
+		private int numQNodes;
+		private int numCutoffs;
+		private int numTranspositions;
+		private System.Diagnostics.Stopwatch searchStopwatch;
 
 		public Search (Board board, AISettings settings) {
 			this.board = board;
@@ -86,7 +86,7 @@
 						searchDiagnostics.lastCompletedDepth = searchDepth;
 						searchDiagnostics.move = bestMove.Name;
 						searchDiagnostics.eval = bestEval;
-						searchDiagnostics.moveVal = Chess.PGNCreator.NotationFromMove (FenUtility.CurrentFen (board), bestMove);
+						searchDiagnostics.moveVal = PGNCreator.NotationFromMove (FenUtility.CurrentFen (board), bestMove);
 
 						// Exit search if found a mate
 						if (IsMateScore (bestEval) && !settings.endlessSearchMode) {
@@ -115,7 +115,7 @@
 			abortSearch = true;
 		}
 
-		int SearchMoves (int depth, int plyFromRoot, int alpha, int beta) {
+		private int SearchMoves (int depth, int plyFromRoot, int alpha, int beta) {
 			if (abortSearch) {
 				return 0;
 			}
@@ -206,7 +206,7 @@
 		}
 
 		// Search capture moves until a 'quiet' position is reached.
-		int QuiescenceSearch (int alpha, int beta) {
+		private int QuiescenceSearch (int alpha, int beta) {
 			// A player isn't forced to make a capture (typically), so see what the evaluation is without capturing anything.
 			// This prevents situations where a player ony has bad captures available from being evaluated as bad,
 			// when the player might have good non-capture moves available.
@@ -249,13 +249,13 @@
 
 		}
 
-		void LogDebugInfo () {
+		private void LogDebugInfo () {
 			AnnounceMate ();
 			Debug.Log ($"Best move: {bestMoveThisIteration.Name} Eval: {bestEvalThisIteration} Search time: {searchStopwatch.ElapsedMilliseconds} ms.");
 			Debug.Log ($"Num nodes: {numNodes} num Qnodes: {numQNodes} num cutoffs: {numCutoffs} num TThits {numTranspositions}");
 		}
 
-		void AnnounceMate () {
+		private void AnnounceMate () {
 
 			if (IsMateScore (bestEvalThisIteration)) {
 				int numPlyToMate = NumPlyToMateFromScore (bestEvalThisIteration);
@@ -269,7 +269,7 @@
 			}
 		}
 
-		void InitDebugInfo () {
+		private void InitDebugInfo () {
 			searchStopwatch = System.Diagnostics.Stopwatch.StartNew ();
 			numNodes = 0;
 			numQNodes = 0;

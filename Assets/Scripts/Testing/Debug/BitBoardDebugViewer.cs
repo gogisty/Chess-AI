@@ -1,17 +1,18 @@
-﻿using Chess.Game;
+﻿using Core;
 using UnityEngine;
 
-namespace Chess.Testing {
+namespace Testing.Debug {
 	public class BitBoardDebugViewer : MonoBehaviour {
 		public Color colour;
 		public bool show;
 		public bool showCustomBitboard;
 		public ulong customBitboard;
 
-		Material[, ] squareMaterials;
-		GameManager gameManager;
-		ulong lastBitboard;
-		bool settingsChanged;
+		private Material[, ] squareMaterials;
+		private GameManager gameManager;
+		private ulong lastBitboard;
+
+		private bool settingsChanged;
 		/*
 				void Start () {
 					CreateBoardUI ();

@@ -1,4 +1,4 @@
-﻿namespace Chess {
+﻿namespace Core {
 	public static class PieceSquareTable {
 
 		public static int Read (int[] table, int square, bool isWhite) {

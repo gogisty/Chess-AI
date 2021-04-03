@@ -1,14 +1,12 @@
-﻿namespace Chess.Game {
-	using System.Collections.Generic;
-	using System.Collections;
-	using UnityEngine;
+﻿using UnityEngine;
 
+namespace Core {
 	public class Clock : MonoBehaviour {
 
 		public TMPro.TMP_Text timerUI;
 		public bool isTurnToMove;
 		public int startSeconds;
-		float secondsRemaining;
+		private float secondsRemaining;
 		public int lowTimeThreshold = 10;
 		[Range (0, 1)]
 		public float inactiveAlpha = 0.75f;
@@ -16,11 +14,11 @@
 		public float decimalFontSizeMultiplier = 0.75f;
 		public Color lowTimeCol;
 
-		void Start () {
+		private void Start () {
 			secondsRemaining = startSeconds;
 		}
 
-		void Update () {
+		private void Update () {
 			if (isTurnToMove) {
 				secondsRemaining -= Time.deltaTime;
 				secondsRemaining = Mathf.Max (0, secondsRemaining);

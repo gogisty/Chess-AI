@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-namespace Chess.Game {
+
+namespace UI {
 	[CreateAssetMenu (menuName = "Theme/Board")]
 	public class BoardTheme : ScriptableObject {
 

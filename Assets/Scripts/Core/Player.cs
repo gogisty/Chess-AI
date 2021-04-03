@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chess.Game {
+﻿namespace Core {
 	public abstract class Player {
 		public event System.Action<Move> onMoveChosen;
 

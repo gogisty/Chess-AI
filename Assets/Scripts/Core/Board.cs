@@ -1,6 +1,6 @@
-﻿namespace Chess {
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Core {
 	public class Board {
 
 		public const int WhiteIndex = 0;
@@ -19,7 +19,7 @@
 		// Bits 4-7 store file of ep square (starting at 1, so 0 = no ep square)
 		// Bits 8-13 captured piece
 		// Bits 14-... fifty mover counter
-		Stack<uint> gameStateHistory;
+		private Stack<uint> gameStateHistory;
 		public uint currentGameState;
 
 		public int plyCount; // Total plies played in game
@@ -37,17 +37,17 @@
 		public PieceList[] knights;
 		public PieceList[] pawns;
 
-		PieceList[] allPieceLists;
+		private PieceList[] allPieceLists;
 
-		const uint whiteCastleKingsideMask = 0b1111111111111110;
-		const uint whiteCastleQueensideMask = 0b1111111111111101;
-		const uint blackCastleKingsideMask = 0b1111111111111011;
-		const uint blackCastleQueensideMask = 0b1111111111110111;
+		private const uint whiteCastleKingsideMask = 0b1111111111111110;
+		private const uint whiteCastleQueensideMask = 0b1111111111111101;
+		private const uint blackCastleKingsideMask = 0b1111111111111011;
+		private const uint blackCastleQueensideMask = 0b1111111111110111;
 
-		const uint whiteCastleMask = whiteCastleKingsideMask & whiteCastleQueensideMask;
-		const uint blackCastleMask = blackCastleKingsideMask & blackCastleQueensideMask;
+		private const uint whiteCastleMask = whiteCastleKingsideMask & whiteCastleQueensideMask;
+		private const uint blackCastleMask = blackCastleKingsideMask & blackCastleQueensideMask;
 
-		PieceList GetPieceList (int pieceType, int colourIndex) {
+		private PieceList GetPieceList (int pieceType, int colourIndex) {
 			return allPieceLists[colourIndex * 8 + pieceType];
 		}
 
@@ -362,7 +362,7 @@
 			ZobristKey = Zobrist.CalculateZobristKey (this);
 		}
 
-		void Initialize () {
+		private void Initialize () {
 			Square = new int[64];
 			KingSquare = new int[2];
 

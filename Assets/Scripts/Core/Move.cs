@@ -6,7 +6,7 @@ bit 0-5: from square (0 to 63)
 bit 6-11: to square (0 to 63)
 bit 12-15: flag
 */
-namespace Chess {
+namespace Core {
 
 	public readonly struct Move {
 
@@ -21,11 +21,11 @@ namespace Chess {
 			public const int PawnTwoForward = 7;
 		}
 
-		readonly ushort moveValue;
+		private readonly ushort moveValue;
 
-		const ushort startSquareMask = 0b0000000000111111;
-		const ushort targetSquareMask = 0b0000111111000000;
-		const ushort flagMask = 0b1111000000000000;
+		private const ushort startSquareMask = 0b0000000000111111;
+		private const ushort targetSquareMask = 0b0000111111000000;
+		private const ushort flagMask = 0b1111000000000000;
 
 		public Move (ushort moveValue) {
 			this.moveValue = moveValue;
